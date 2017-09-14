@@ -2,16 +2,54 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/css/app.css">
 <title>Billing Records</title>
 </head>
 <body>
 
 <h1>Billing Records</h1>
 
+<form action="/billing-records/flat-fees" method="post">
+	<h2>Create a flat-fee billing record</h2>
+	$<input type="number" step=".01" name="amount" required placeholder="0.00">
+	<select name="clientId" required>
+		<option value = "">Select One</option>
+<!-- 		<input type = "text" name = "newCompanyName">  -->
+<!--  <option value="new">/option>  could also work --> 
+<!--  in controller, look for new Company Name and allow entry if it is not already created -->
+		{{ #companies }}
+		<option value="{{ id }}">{{ name }}</option>
+		{{ /companies }}
+	</select>
+	<input type="text" name="description" required placeholder="Enter a description here">
+	<input type="hidden" name="{{ _csrf.parameterName }}" value="{{ _csrf.token }}">
+	<br><br>
+	<button>Save</button> 
+</form>
+<br>
+
+<form action="/billing-records/rate-based" method="post">
+	<h2>Create a rate-based billing record</h2>
+	$<input type="number" step=".01" name="rate" required placeholder="0.00">
+	Quantity<input type="number" step=".01" name="quantity" required placeholder="##">
+	<select name="clientId" required>
+		<option value = "">Select One</option>
+		{{ #companies }}
+		<option value="{{ id }}">{{ name }}</option>
+		{{ /companies }}
+	</select>
+	<input type="text" name="description" required placeholder="Enter a description here">
+	<input type="hidden" name="{{ _csrf.parameterName }}" value="{{ _csrf.token }}">
+	<br><br>
+	<button>Save</button>
+</form>
+
+<br>
 <table>
   <thead>
     <tr>
       <th>Created on</th>
+      <th>Created by</th>
       <th>Description</th>
       <th>Client</th>
       <th>Fee</th>
@@ -24,6 +62,7 @@
     {{#records}}
       <tr>
         <td>{{ createdOn }}</td>
+        <td>{{ createdBy.username }}</td>
         <td>{{ description }}</td>
         <td>{{ client.name }}</td>
         <td>${{#amount}}{{ amount }}{{/amount}}</td>
@@ -34,6 +73,6 @@
     {{/records}}
   </tbody>  
 </table>
-
+<script src="/js/app.js"></script>
 </body>
 </html>

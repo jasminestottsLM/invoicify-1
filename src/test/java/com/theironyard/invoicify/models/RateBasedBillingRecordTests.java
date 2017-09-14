@@ -13,11 +13,11 @@ import org.meanbean.test.ConfigurationBuilder;
 public class RateBasedBillingRecordTests {
 
 	private RateBasedBillingRecord record;
-	
+	 
 	@Before
 	public void setup() {
 		record = new RateBasedBillingRecord();
-	}
+	}  
 	
 	@Test
 	public void test_getters_and_setters() {
@@ -31,11 +31,11 @@ public class RateBasedBillingRecordTests {
 	}
 	
 	@Test
-	public void test_createdOn_is_null_by_default() {
+	public void test_createdOn_is__not_null_by_default() {
 		Date actual = record.getCreatedOn();
 		
-		assertThat(actual).isNull();
-	}
+		assertThat(actual).isNotNull();
+	} 
 	
 	@Test
 	public void test_createdOn_gets_and_sets() {

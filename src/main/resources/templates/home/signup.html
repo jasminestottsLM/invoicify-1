@@ -2,12 +2,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/css/app.css">
 <title>Welcome to the Jungle</title>
 </head>
 <body>
-
+<h1>Welcome to Invoicify!</h1>
+<br>
 {{#errorMessage}}
-  <div>{{ errorMessage }}</div>
+  <div class="errorMessage">{{ errorMessage }}</div>
 {{/errorMessage}}
 
 <form method="post" action="/signup">
@@ -19,7 +21,7 @@
   <br>
   <button>Sign up!</button>
 </form>
-
+<script src="/js/app.js"></script>
 </body>
 </html>
 

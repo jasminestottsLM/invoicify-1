@@ -2,6 +2,7 @@ package com.theironyard.invoicify.models;
 
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,20 +18,23 @@ public class InvoiceLineItem {
 	private Long id;
 
 	@OneToOne
-	private BillingRecord billingRecord;
+	private BillingRecord billingRecord; 
 	
 	private Date createdOn;
 	
 	@ManyToOne
 	private User createdBy;
+	
+	@ManyToOne
+	private Invoice invoice;
 
-	public Long getId() {
+	public Long getId() { 
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
-	}
+	} 
 
 	public BillingRecord getBillingRecord() {
 		return billingRecord;
@@ -38,7 +42,7 @@ public class InvoiceLineItem {
 
 	public void setBillingRecord(BillingRecord billingRecord) {
 		this.billingRecord = billingRecord;
-	}
+	} 
 
 	public Date getCreatedOn() {
 		return createdOn;
@@ -54,5 +58,13 @@ public class InvoiceLineItem {
 
 	public void setCreatedBy(User createdBy) {
 		this.createdBy = createdBy;
+	}
+
+	public Invoice getInvoice() {
+		return invoice;
+	}
+
+	public void setInvoice(Invoice invoice) {
+		this.invoice = invoice;
 	}
 }

@@ -11,7 +11,7 @@ import com.theironyard.invoicify.models.User;
 import com.theironyard.invoicify.repositories.BillingRecordRepository;
 import com.theironyard.invoicify.repositories.CompanyRepository;
 import com.theironyard.invoicify.repositories.UserRepository;
-
+ 
 @Configuration
 @Profile("development")
 public class SeedData {

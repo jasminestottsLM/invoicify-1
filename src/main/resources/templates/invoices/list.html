@@ -2,13 +2,40 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/css/app.css">
 <title>Invoices</title>
 </head>
 <body>
 
-<div>Hello, {{ user.username }}</div>
+	<div>Hello, {{ user.username }}</div>
 
-<h1>Invoices</h1>
+	<h1>Invoices</h1>
+	<a href="/invoices/new">Create an Invoice</a>
+	<br>
+	{{ #showTable }}
+	<table>
+		<thead>
+			<tr>
+				<th>Created on</th>
+				<th>Created by</th>
+				<th>Company</th>
+				<th>Invoice Number</th>
+			</tr>
+		</thead>
+		<tbody>
 
+			{{ #invoices }}
+			<tr>
+				<td>{{ createdOn }}</td>
+				<td>{{ createdBy.username }}</td>
+				<td>{{ company.name }}</td>
+				<td>{{ invoiceNumber }}</td>
+			</tr>
+			{{ /invoices }}
+
+		</tbody>
+	</table>
+	{{ /showTable }}
+	<script src="/js/app.js"></script>
 </body>
 </html>

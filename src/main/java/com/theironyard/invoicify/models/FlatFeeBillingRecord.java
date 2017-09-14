@@ -11,11 +11,11 @@ public class FlatFeeBillingRecord extends BillingRecord {
 	
 	public FlatFeeBillingRecord(double amount, String description, User createdBy, Company client) {
 		super(description, createdBy, client);
-		this.amount = amount;
+		this.amount = amount; 
 	}
-	
+	 
 	@Override
-	public double getTotal() {
+	public double getTotal() { 
 		return amount;
 	}
 

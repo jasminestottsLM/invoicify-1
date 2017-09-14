@@ -19,7 +19,7 @@ public class Company {
 	@Column(length=255)
 	private String name;
 	
-	@OneToMany(mappedBy="company")
+	@OneToMany(mappedBy="company") 
 	private List<Invoice> invoices;
 	
 	public Company() {}

@@ -29,9 +29,9 @@ public class User implements UserDetails {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	@Column(nullable=false)
+	@Column(nullable=false) 
 	private String password;
-	
+	 
 	@Column(nullable=false, unique=true)
 	private String username;
 	
@@ -48,7 +48,7 @@ public class User implements UserDetails {
 		roles.add(new UserRole(roleName, this));
 	}
 
-	@Override
+	@Override 
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return roles.stream()
 			.map(userRole -> "ROLE_" + userRole.getName())

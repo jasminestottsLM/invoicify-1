@@ -17,7 +17,7 @@ public class UserRoleTests {
 		assertThat(role.getUser()).isEqualTo(user);
 		assertThat(role.getName()).isEqualTo("TESTER");
 	}
-
+ 
 	@Test
 	public void test_getters_and_setters() {
 		new BeanTester().testBean(UserRole.class);

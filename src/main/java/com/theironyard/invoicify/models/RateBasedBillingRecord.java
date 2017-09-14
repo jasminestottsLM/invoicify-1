@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 
 @Entity
 public class RateBasedBillingRecord extends BillingRecord {
-
+ 
 	private double rate;
 	
 	private double quantity;

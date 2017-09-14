@@ -13,7 +13,7 @@ import com.theironyard.invoicify.repositories.UserRepository;
 
 public class HomeControllerTests {
 	
-	private PasswordEncoder encoder;
+	private PasswordEncoder encoder; 
 	private UserRepository repo;
 	private HomeController controller;
 	

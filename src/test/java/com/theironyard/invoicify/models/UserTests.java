@@ -13,7 +13,7 @@ import org.springframework.security.core.GrantedAuthority;
 public class UserTests {
 
 	private User user;
-
+ 
 	@Before
 	public void setup() {
 		user = new User("curtis", "password", "ADMIN");
@@ -26,12 +26,12 @@ public class UserTests {
 		assertThat(actual).hasSize(1);
 		assertThat(actual.get(0).getAuthority()).isEqualTo("ROLE_ADMIN");
 	}
-
+ 
 	@Test
 	public void test_getters_and_setters() {
 		BeanTester tester = new BeanTester();
 		tester.testBean(User.class);
-	}
+	} 
 	
 	@Test
 	public void test_default_constructor() {

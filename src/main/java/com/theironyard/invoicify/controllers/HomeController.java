@@ -12,7 +12,7 @@ import com.theironyard.invoicify.models.User;
 import com.theironyard.invoicify.repositories.UserRepository;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/")  
 public class HomeController {
 	
 	private UserRepository userRepository;
@@ -26,7 +26,7 @@ public class HomeController {
 	@GetMapping("")
 	public String home() {
 		return "home/default";
-	}
+	} 
 	
 	@GetMapping("signup")
 	public String signup() {

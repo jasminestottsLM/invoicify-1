@@ -1,0 +1,35 @@
+html {
+	font-family: sans-serif;
+}
+
+h1 {
+	color: #004891;
+}
+
+input {
+	text-align: right;
+}
+
+.errorMessage {
+	color: red;
+}
+
+th {
+	background-color: #64b1ff;
+}
+
+table, td, th {
+	text-align: center;
+	padding: 5px;
+	border-collapse: collapse;
+	border: 1px solid black;
+	border-bottom: 2px solid black;
+}
+
+tr:nth-child(even) {
+	background-color: #e9e9e9;
+}
+
+tr:hover {
+	background-color: #c4e1ff;
+}
