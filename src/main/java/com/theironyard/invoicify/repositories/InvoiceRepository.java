@@ -9,6 +9,7 @@ import com.theironyard.invoicify.models.InvoiceLineItem;
 
 public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
 
+	List<Invoice> findByCompanyId(long clientId);
 	
 
 }

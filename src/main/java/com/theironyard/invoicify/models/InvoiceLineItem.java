@@ -23,7 +23,7 @@ public class InvoiceLineItem {
 	private Date createdOn;
 	
 	@ManyToOne
-	private User createdBy;
+	private User createdBy; 
 	
 	@ManyToOne
 	private Invoice invoice;

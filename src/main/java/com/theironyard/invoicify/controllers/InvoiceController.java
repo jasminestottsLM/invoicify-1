@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.theironyard.invoicify.models.BillingRecord;
 import com.theironyard.invoicify.models.Company;
+import com.theironyard.invoicify.models.FlatFeeBillingRecord;
 import com.theironyard.invoicify.models.Invoice;
 import com.theironyard.invoicify.models.InvoiceLineItem;
 import com.theironyard.invoicify.models.User;
@@ -59,14 +60,13 @@ public class InvoiceController {
 	@PostMapping("new")
 	public ModelAndView selectRecords(long clientId) {
 		Company client = companyRepository.findOne(clientId);
-//		BillingRecord record = recordsRepository.findByClientId(clientId);
-//		Long BillingId = record.getId(); 
-		ModelAndView mv = new ModelAndView("invoices/step-2");
-		List<InvoiceLineItem> items = new ArrayList<InvoiceLineItem>();
+		
+		ModelAndView mv = new ModelAndView("invoices/step-2"); 
+		List<Invoice> invoices = invoiceRepository.findByCompanyId(clientId);
 		mv.addObject("client", client.getName());
 		mv.addObject("clientId", clientId);
-		mv.addObject("records", recordsRepository.findByClientId(clientId));
-//		mv.addObject("records", recordsRepository.findByClientIdAndIsNull(clientId, BillingId));
+
+		mv.addObject("records", recordsRepository.findByClientIdAndLineItemIsNull(clientId));
 		return mv;
 	}
 	
@@ -87,7 +87,7 @@ public class InvoiceController {
 			lineItem.setCreatedOn(now);
 			lineItem.setInvoice(invoice);
 			items.add(lineItem);
-		}
+		} 
 		
 		invoice.setLineItems(items);
 		invoice.setCreatedBy(creator);
