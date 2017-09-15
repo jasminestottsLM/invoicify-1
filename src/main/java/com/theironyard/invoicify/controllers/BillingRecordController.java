@@ -20,7 +20,7 @@ public class BillingRecordController {
 		this.companyRepository = companyRepository;  
 	}
 
-	@GetMapping("")
+	@GetMapping("") 
 	public ModelAndView list() {
 		ModelAndView mv = new ModelAndView("billing-records/list");
 		mv.addObject("records", recordRepository.findAll());

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.theironyard.invoicify.models.BillingRecord;
+import com.theironyard.invoicify.models.InvoiceLineItem;
 
 public interface BillingRecordRepository extends JpaRepository<BillingRecord, Long> {
 
@@ -12,4 +13,5 @@ public interface BillingRecordRepository extends JpaRepository<BillingRecord, Lo
 
 	List<BillingRecord> findByIdIn(long[] recordIds);
 
+//	List<BillingRecord> findByClientIdAndNotIn(long clientId, List<InvoiceLineItem> items);
 }

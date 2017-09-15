@@ -15,7 +15,7 @@ import com.theironyard.invoicify.repositories.UserRepository;
 @RequestMapping("/")  
 public class HomeController {
 	
-	private UserRepository userRepository;
+	private UserRepository userRepository; 
 	private PasswordEncoder encoder;
 	
 	public HomeController(UserRepository userRepository, PasswordEncoder encoder) {

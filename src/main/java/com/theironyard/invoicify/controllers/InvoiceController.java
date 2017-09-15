@@ -19,6 +19,7 @@ import com.theironyard.invoicify.models.InvoiceLineItem;
 import com.theironyard.invoicify.models.User;
 import com.theironyard.invoicify.repositories.BillingRecordRepository;
 import com.theironyard.invoicify.repositories.CompanyRepository;
+import com.theironyard.invoicify.repositories.InvoiceLineItemRepository;
 import com.theironyard.invoicify.repositories.InvoiceRepository;
 
 @Controller
@@ -28,11 +29,13 @@ public class InvoiceController {
 	private CompanyRepository companyRepository;
 	private BillingRecordRepository recordsRepository;
 	private InvoiceRepository invoiceRepository;
+	private InvoiceLineItemRepository invoiceLineItemRepository;
 	
-	public InvoiceController(CompanyRepository companyRepository, InvoiceRepository invoiceRepository, BillingRecordRepository recordsRepository) {
+	public InvoiceController(CompanyRepository companyRepository, InvoiceRepository invoiceRepository, BillingRecordRepository recordsRepository, InvoiceLineItemRepository invoiceLineItemRepository) {
 		this.companyRepository = companyRepository; 
 		this.invoiceRepository = invoiceRepository;
 		this.recordsRepository = recordsRepository;
+		this.invoiceLineItemRepository = invoiceLineItemRepository;
 	}
 	
 	@GetMapping("") 
@@ -56,10 +59,14 @@ public class InvoiceController {
 	@PostMapping("new")
 	public ModelAndView selectRecords(long clientId) {
 		Company client = companyRepository.findOne(clientId);
+//		BillingRecord record = recordsRepository.findByClientId(clientId);
+//		Long BillingId = record.getId(); 
 		ModelAndView mv = new ModelAndView("invoices/step-2");
+		List<InvoiceLineItem> items = new ArrayList<InvoiceLineItem>();
 		mv.addObject("client", client.getName());
 		mv.addObject("clientId", clientId);
 		mv.addObject("records", recordsRepository.findByClientId(clientId));
+//		mv.addObject("records", recordsRepository.findByClientIdAndIsNull(clientId, BillingId));
 		return mv;
 	}
 	

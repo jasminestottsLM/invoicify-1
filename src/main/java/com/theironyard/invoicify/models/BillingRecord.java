@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-@Entity
+@Entity 
 public abstract class BillingRecord {
 
 	@Id
@@ -28,7 +28,7 @@ public abstract class BillingRecord {
 	private InvoiceLineItem lineItem;
 	 
 	@ManyToOne
-	private Company client;
+	private Company client; 
 	
 	public BillingRecord() {
 		long now = Calendar.getInstance().getTimeInMillis();

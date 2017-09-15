@@ -16,7 +16,7 @@ public class Invoice {
 
 	@Id 
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+	private Long id; 
 	
 	@ManyToOne 
 	private Company company;
