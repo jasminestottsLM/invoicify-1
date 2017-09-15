@@ -21,14 +21,14 @@ public class HomeController {
 	public HomeController(UserRepository userRepository, PasswordEncoder encoder) {
 		this.userRepository = userRepository;
 		this.encoder = encoder;
-	}
+	} 
 
 	@GetMapping("")
 	public String home() {
 		return "home/default";
 	} 
 	
-	@GetMapping("signup")
+	@GetMapping("signup") 
 	public String signup() {
 		return "home/signup";
 	}

@@ -25,7 +25,7 @@ public abstract class BillingRecord {
 	private String description;
 	  
 	@OneToOne(mappedBy="billingRecord")
-	private InvoiceLineItem lineItem;
+	private InvoiceLineItem lineItem; 
 	 
 	@ManyToOne
 	private Company client; 

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/app.css">
+<title>Clients</title>
+</head>
+<body>
+	
+	<h1>Clients</h1>
+	<h2>Add a Client</h2>
+	<form action="/admin/create" method="post">
+	Company Name: <input type="text" required placeholder="Company Name" name="name">
+	<br>
+	<button>Create Client</button>
+	<input type="hidden" name="{{ _csrf.parameterName }}" value="{{ _csrf.token }}">
+	</form>
+	<br>
+	<table>
+		<thead>
+			<tr>
+				<th>Company Name</th>
+				<th>Number of Invoices</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			{{ #companies }}
+			<tr>
+				<td>{{ name }}</td>
+				<td>{{ invoices.size }}</td>
+			</tr>
+			{{ /companies }}
+
+		</tbody>
+	</table>
+
+	<script src="/js/app.js"></script>
+</body>
+</html>

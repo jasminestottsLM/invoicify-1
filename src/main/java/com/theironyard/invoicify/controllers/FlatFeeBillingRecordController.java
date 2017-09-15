@@ -30,7 +30,7 @@ public class FlatFeeBillingRecordController {
 		Company client = companyRepository.findOne(clientId);
 		record.setClient(client);
 		record.setCreatedBy(user);
-		recordRepository.save(record);
+		recordRepository.save(record); 
 		return new ModelAndView("redirect:/billing-records");
 	}   
 }

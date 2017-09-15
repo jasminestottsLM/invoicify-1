@@ -23,7 +23,7 @@ public class Company {
 	private List<Invoice> invoices;
 	
 	public Company() {}
-	
+	 
 	public Company(String name) {
 		this.name = name; 
 	}

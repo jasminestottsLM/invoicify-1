@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +38,12 @@ public class InvoiceController {
 		this.invoiceRepository = invoiceRepository;
 		this.recordsRepository = recordsRepository;
 		this.invoiceLineItemRepository = invoiceLineItemRepository;
+	}
+	
+	@GetMapping("home")
+	public ModelAndView goHome() {
+		ModelAndView mv = new ModelAndView("redirect:/home/default");
+		return mv;
 	}
 	
 	@GetMapping("") 
