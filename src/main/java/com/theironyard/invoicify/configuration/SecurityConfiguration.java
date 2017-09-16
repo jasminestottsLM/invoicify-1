@@ -23,15 +23,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http	
 			.authorizeRequests()
-				.antMatchers("/", "/css/**", "/js/**", "/signup").permitAll()
+				.antMatchers("/", "/css/**", "/js/**", "/signup", "/login-page").permitAll()
 				.antMatchers("/invoices/**").hasAnyRole("ADMIN", "ACCOUNTANT")
 				.antMatchers("/billing-records/**").hasAnyRole("ADMIN", "CLERK")
 				.antMatchers("/admin/**").hasRole("ADMIN")
 				.anyRequest().authenticated()
 			.and()
-			.formLogin();
-//				.loginPage("/login-page")
-//				.loginProcessingUrl("/login");
+			.formLogin()
+ 				.loginPage("/login-page")
+				.loginProcessingUrl("/login");
 	}
 	
 	@Bean
@@ -47,7 +47,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 }
 
 
-
+ 
 
 
 

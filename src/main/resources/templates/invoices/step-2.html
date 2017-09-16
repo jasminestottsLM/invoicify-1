@@ -15,9 +15,13 @@
 			{{ errorMessage }}
 		{{ /errorMessage }}
 		</div>
+		{{ #noRecordsMessage }}
+			{{ noRecordsMessage }}
+		{{ /noRecordsMessage }}
+		{{ #showRecords }}
 		Invoice #: <input type="text" required placeholder="Invoice Number" name="invoiceNumber">
 		<br>
-		{{ #showRecords }}
+		
 		<h2>Choose billing records:</h2>
 		<table>
 			<thead>
@@ -50,9 +54,9 @@
 				{{ /records }}
 			</tbody>
 		</table>
-		{{ /showRecords }}
 		<br>
 		<button>Create Invoice</button>
+		{{ /showRecords }}
 		<input type="hidden" name="{{ _csrf.parameterName }}" value="{{ _csrf.token }}"> 
 		<input type="hidden" name="clientId" value="{{ clientId }}">
 	</form>

@@ -73,10 +73,13 @@ public class InvoiceController {
 
 		ModelAndView mv = new ModelAndView("invoices/step-2");
 		List<Invoice> invoices = invoiceRepository.findByCompanyId(clientId);
-		List<BillingRecord> selectedRecords = recordsRepository.findByClientId(clientId);
+		List<BillingRecord> selectedRecords = recordsRepository.findByClientIdAndLineItemIsNull(clientId);
 		mv.addObject("client", client.getName());
 		mv.addObject("clientId", clientId);
 		mv.addObject("showRecords", selectedRecords.size() > 0);
+		if (selectedRecords.size() == 0) {
+			mv.addObject("noRecordsMessage", "There are no uninvoiced records for this client.");
+		}
 		mv.addObject("records", recordsRepository.findByClientIdAndLineItemIsNull(clientId));
 		return mv;
 	}

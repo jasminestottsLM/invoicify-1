@@ -10,7 +10,7 @@
 	<h1>Clients</h1>
 	<h2>Add a Client</h2>
 	<form action="/admin/create" method="post">
-	Company Name: <input type="text" required placeholder="Company Name" name="name">
+	Company Name: <input type="text" required placeholder="Company Name" name="name" autofocus>
 	<br>
 	<button>Create Client</button>
 	<input type="hidden" name="{{ _csrf.parameterName }}" value="{{ _csrf.token }}">

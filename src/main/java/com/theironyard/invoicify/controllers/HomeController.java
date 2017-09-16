@@ -13,7 +13,7 @@ import com.theironyard.invoicify.repositories.UserRepository;
 
 @Controller
 @RequestMapping("/")  
-public class HomeController {
+public class HomeController { 
 	
 	private UserRepository userRepository; 
 	private PasswordEncoder encoder;
@@ -28,6 +28,11 @@ public class HomeController {
 		ModelAndView mv = new ModelAndView("home/default");
 		return mv;
 	} 
+	
+	@GetMapping("login-page")
+	public String login() {
+		return "home/login-page";
+	}
 	
 	@GetMapping("signup") 
 	public String signup() {
