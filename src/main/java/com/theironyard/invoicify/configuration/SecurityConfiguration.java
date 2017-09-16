@@ -18,7 +18,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	public SecurityConfiguration(InvoicifyUserDetailsService userDetailsService) {
 		this.userDetailsService = userDetailsService;
 	}
- 
+  
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http	
@@ -30,6 +30,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.anyRequest().authenticated()
 			.and()
 			.formLogin();
+//				.loginPage("/login-page")
+//				.loginProcessingUrl("/login");
 	}
 	
 	@Bean

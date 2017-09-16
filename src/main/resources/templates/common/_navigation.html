@@ -1,0 +1,43 @@
+<html>
+<head>
+<meta charset="UTF-8">
+
+<br>
+<br>
+<br>
+<br>
+
+<a href="/">Home</a>
+
+<br>
+{{ #user }}
+{{ #isAdmin }}
+<a href="/admin">Admin Page</a>
+<br>
+{{ /isAdmin }}
+{{ #isClerk }}
+<a href="/billing-records">Billing Records</a>
+<br>
+{{ /isClerk }}
+{{ #isAccountant }}
+<a href="/invoices">Invoices</a>
+<br>
+{{ /isAccountant }}
+<br>
+<br>
+
+<form method="post" action="/logout">
+	<button>Logout</button>
+	<input type="hidden" name="{{ _csrf.parameterName }}" value="{{ _csrf.token }}">
+</form>
+{{ /user }}
+
+{{ #notUser }}
+<a href="/signup">Sign up!</a>
+<br>
+<a href="/login">Login</a>
+{{ /notUser }}
+</head>
+<body>
+</body>
+</html>

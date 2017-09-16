@@ -24,8 +24,9 @@ public class HomeController {
 	} 
 
 	@GetMapping("")
-	public String home() {
-		return "home/default";
+	public ModelAndView goHome() {
+		ModelAndView mv = new ModelAndView("home/default");
+		return mv;
 	} 
 	
 	@GetMapping("signup") 
@@ -35,7 +36,6 @@ public class HomeController {
 	
 	@PostMapping("signup")
 	public ModelAndView handleSignup(User user) {
-		// TODO THIS IS REALLY DUMB; NEEDS REFACTORING
 		String password = user.getPassword();
 		String encryptedPassword = encoder.encode(password);
 		user.setPassword(encryptedPassword);

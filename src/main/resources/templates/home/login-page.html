@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/css/app.css">
+<title>Log in to Invoicify</title>
+</head>
+<body>
+<form method="post" action="/login">
+	<h1>Username</h1>
+	<input type="text" name="username">
+	<h1>Password</h1>
+	<input type="text" name="password">
+	<br>
+	<br>
+	<button>Login</button>
+	<input type="hidden" name="{{ _csrf.parameterName }}" value = "{{ _csrf.token }}">
+	</form>
+</body>
+</html>

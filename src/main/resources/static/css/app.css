@@ -6,6 +6,10 @@ h1 {
 	color: #004891;
 }
 
+.error {
+	color: #c10000;
+}
+
 input {
 	text-align: right;
 }

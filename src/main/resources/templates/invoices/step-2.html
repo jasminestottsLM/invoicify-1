@@ -10,8 +10,14 @@
 	<h2>Client: {{ client }}</h2>
 	<br>
 	<form action="/invoices/create" method="post">
+		<div class=error>
+		{{ #errorMessage }}
+			{{ errorMessage }}
+		{{ /errorMessage }}
+		</div>
 		Invoice #: <input type="text" required placeholder="Invoice Number" name="invoiceNumber">
 		<br>
+		{{ #showRecords }}
 		<h2>Choose billing records:</h2>
 		<table>
 			<thead>
@@ -28,6 +34,7 @@
 				</tr>
 			</thead>
 			<tbody>
+				
 				{{ #records }}
 				<tr>
 					<td><input type=checkbox value="{{ id }}" name = "recordIds"></td>
@@ -43,10 +50,12 @@
 				{{ /records }}
 			</tbody>
 		</table>
+		{{ /showRecords }}
 		<br>
 		<button>Create Invoice</button>
 		<input type="hidden" name="{{ _csrf.parameterName }}" value="{{ _csrf.token }}"> 
 		<input type="hidden" name="clientId" value="{{ clientId }}">
 	</form>
+	{{> common/_navigation }}
 </body>
 </html>

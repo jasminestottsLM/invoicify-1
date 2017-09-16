@@ -1,13 +1,15 @@
 package com.theironyard.invoicify.controllers;
 
-import java.sql.Date; 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,21 +34,22 @@ public class InvoiceController {
 	private BillingRecordRepository recordsRepository;
 	private InvoiceRepository invoiceRepository;
 	private InvoiceLineItemRepository invoiceLineItemRepository;
-	
-	public InvoiceController(CompanyRepository companyRepository, InvoiceRepository invoiceRepository, BillingRecordRepository recordsRepository, InvoiceLineItemRepository invoiceLineItemRepository) {
-		this.companyRepository = companyRepository; 
+
+	public InvoiceController(CompanyRepository companyRepository, InvoiceRepository invoiceRepository,
+			BillingRecordRepository recordsRepository, InvoiceLineItemRepository invoiceLineItemRepository) {
+		this.companyRepository = companyRepository;
 		this.invoiceRepository = invoiceRepository;
 		this.recordsRepository = recordsRepository;
 		this.invoiceLineItemRepository = invoiceLineItemRepository;
 	}
-	
+
 	@GetMapping("home")
 	public ModelAndView goHome() {
 		ModelAndView mv = new ModelAndView("redirect:/home/default");
 		return mv;
 	}
-	
-	@GetMapping("") 
+
+	@GetMapping("")
 	public ModelAndView list(Authentication auth) {
 		User user = (User) auth.getPrincipal();
 		ModelAndView mv = new ModelAndView("invoices/list");
@@ -54,36 +57,39 @@ public class InvoiceController {
 		mv.addObject("user", user);
 		mv.addObject("invoices", invoiceRepository.findAll());
 		mv.addObject("showTable", invoices.size() > 0);
-		return mv;  
+		return mv;
 	}
-	
+
 	@GetMapping("new")
 	public ModelAndView newInvoice() {
 		ModelAndView mv = new ModelAndView("invoices/step-1");
 		mv.addObject("companies", companyRepository.findAll());
 		return mv;
-	} 
-	
+	}
+
 	@PostMapping("new")
 	public ModelAndView selectRecords(long clientId) {
 		Company client = companyRepository.findOne(clientId);
-		
-		ModelAndView mv = new ModelAndView("invoices/step-2"); 
+
+		ModelAndView mv = new ModelAndView("invoices/step-2");
 		List<Invoice> invoices = invoiceRepository.findByCompanyId(clientId);
+		List<BillingRecord> selectedRecords = recordsRepository.findByClientId(clientId);
 		mv.addObject("client", client.getName());
 		mv.addObject("clientId", clientId);
-
+		mv.addObject("showRecords", selectedRecords.size() > 0);
 		mv.addObject("records", recordsRepository.findByClientIdAndLineItemIsNull(clientId));
 		return mv;
 	}
 	
 	@PostMapping("create")
 	public ModelAndView createInvoice(Invoice invoice, long clientId, long[] recordIds, Authentication auth) {
+		
+		ModelAndView mv = new ModelAndView("redirect:/invoices");
 		User creator = (User) auth.getPrincipal();
 		List<BillingRecord> records = recordsRepository.findByIdIn(recordIds);
 		long nowTime = Calendar.getInstance().getTimeInMillis();
 		Date now = new Date(nowTime);
-		ModelAndView mv = new ModelAndView("redirect:/invoices");
+		
 		mv.addObject("user", creator);
 		
 		List<InvoiceLineItem> items = new ArrayList<InvoiceLineItem>();
@@ -94,34 +100,22 @@ public class InvoiceController {
 			lineItem.setCreatedOn(now);
 			lineItem.setInvoice(invoice);
 			items.add(lineItem);
-		} 
 		
+
 		invoice.setLineItems(items);
 		invoice.setCreatedBy(creator);
 		invoice.setCompany(companyRepository.findOne(clientId));
 		invoice.setCreatedOn(now);
 		invoice.setInvoiceNumber(invoice.getInvoiceNumber());
-		
+		}
 		invoiceRepository.save(invoice);
-		
-		return mv;
+		return mv;		
 	}
 	
+	@ExceptionHandler({InvalidDataAccessApiUsageException.class, IllegalArgumentException.class})
+	public ModelAndView handleInvoiceCreationError() {
+		ModelAndView mv = new ModelAndView("/invoices/new");
+		mv.addObject("errorMessage", "Please select at least one billing record.");
+		return mv;
+	}
 }
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-

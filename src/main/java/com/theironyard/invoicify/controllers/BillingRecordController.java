@@ -26,7 +26,7 @@ public class BillingRecordController {
 		mv.addObject("records", recordRepository.findAll());
 		mv.addObject("companies", companyRepository.findAll());
 		return mv;  
-	} 
+	}  
 	
 }  
  
